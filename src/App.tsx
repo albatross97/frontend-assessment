@@ -18,7 +18,7 @@ function App() {
     <div className="flex flex-col h-screen">
       <header className="bg-primary text-white p-4">
         <img
-          src="/stackline_logo.svg"
+          src={`${process.env.PUBLIC_URL}/stackline_logo.svg`}
           className="Stackline-logo"
           width="120"
           height="auto"
