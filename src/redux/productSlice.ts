@@ -81,13 +81,12 @@ const productSlice = createSlice({
       const selectedProduct = state.products[state.selectedIndex];
 
       if (!selectedProduct || !selectedProduct.sales) {
-        return state;
+        return;
       }
 
-      state.sortingDirection = direction;
-      state.sortingColumn = field;
+      const copiedSales = [...selectedProduct.sales];
 
-      selectedProduct.sales.sort((a: SalesData, b: SalesData) => {
+      copiedSales.sort((a: SalesData, b: SalesData) => {
         if (field === 'weekEnding') {
           // Ensure the weekEnding property is treated as a date
           return direction === 'asc'
@@ -101,6 +100,11 @@ const productSlice = createSlice({
             : b[field] - a[field];
         }
       });
+
+      selectedProduct.sales = copiedSales;
+
+      state.sortingDirection = direction;
+      state.sortingColumn = field;
     },
   },
   extraReducers: (builder) => {
